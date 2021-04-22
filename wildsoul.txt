@@ -1,0 +1,5 @@
+https://www.wildsouls.gr/en
+
+메인
+container 1500px
+margin:0 15px
