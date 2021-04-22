@@ -3,3 +3,5 @@ https://www.wildsouls.gr/en
 메인
 container 1500px
 margin:0 15px
+
+D:/portfolio2/04_22_portfolio2_wildsoul

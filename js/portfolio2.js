@@ -647,7 +647,7 @@ var portfolio2 = {
             }
 
             for(i=0;i<3;i++){
-                $box.eq(n).find('span').eq(next[i]).stop().animate({left:(91*i)+'%'},0).animate({left:(91*(i-1))+'%'},2000,'linear');
+                $box.eq(n).find('span').eq(next[i]).stop().animate({left:(100*i)+'%'},0).animate({left:(100*(i-1))+'%'},2000,'linear');
             }
            
         }
