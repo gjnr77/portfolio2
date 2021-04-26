@@ -1,6 +1,7 @@
 ;(function($){
 var portfolio2 = {
     init:function(){
+
         var that = this
         that.headerFn();
         that.section1();
@@ -11,8 +12,13 @@ var portfolio2 = {
         that.section6();
         that.section7();
         that.section8();
+        that.section9();
+        that.section10();
+        that.footer2Fn();
     },
     headerFn:function(){
+
+
         var $wrap = $('#wrap');
 
         $(window).scroll(function(){
@@ -26,8 +32,25 @@ var portfolio2 = {
                 $wrap.css({backgroundColor:'rgb('+190+','+90+','+75+')'},500)
                 // alert('d');
             }
+            if($(window).scrollTop()>$('#section10').offset().top-500){
+                $wrap.css({backgroundColor:'rgb('+252+','+187+','+187+')'},500)
+            }
             // console.log('1::'+$(window).scrollTop())
             // console.log($('#section8').offset().top)
+
+            // nav
+            var $subBtn = $('#header .sub-btn');
+            var $subsub = $('#header .subsub');
+
+            $subBtn.on({
+                click:function(){
+                    console.log('찍힘!');
+                    $subsub.stop().hide();
+                    $(this).next().stop().show(500);
+                }
+            })
+
+
         })
     },
     section1:function(){
@@ -77,24 +100,53 @@ var portfolio2 = {
         //     resizeFn();  
         // })
 
-        for(var i=0;i<=n;i++){
-            $time.eq(i).stop().animate({marginTop:0},0).animate({marginTop:(-85*move[i])+'px'},1000);
+        $(window).resize(function(){
+            setTimeout(mainTimer,100);
+        })
+        
+        function mainTimer(){
+            for(var i=0;i<=n;i++){
+                if($(window).innerWidth()>600){
+                    $time.eq(i).stop().animate({marginTop:0},0).animate({marginTop:(-85*move[i])+'px'},1000);
+                }
+                else {
+                    $time.eq(i).stop().animate({marginTop:0},0).animate({marginTop:(-50*move[i])+'px'},1000);
+                }
+            }
         }
+        setTimeout(mainTimer,100);
         
         setInterval(function(){
             j--;
             if(j<0){j=9}
-                $time.eq(5).stop().animate({marginTop:(-85*j)+'px'},600)
+                if($(window).innerWidth()>600){
+                    $time.eq(5).stop().animate({marginTop:(-85*j)+'px'},600)
+                }
+                else{
+                    $time.eq(5).stop().animate({marginTop:(-50*j)+'px'},600)
+                }
+                
         },1000);
         setInterval(function(){
             k--;
             if(k<0){k=5}
-                $time.eq(4).stop().animate({marginTop:(-85*k)+'px'},1000);
+                if($(window).innerWidth()>600){
+                    $time.eq(4).stop().animate({marginTop:(-85*k)+'px'},1000);
+                }
+                else{
+                    $time.eq(4).stop().animate({marginTop:(-50*k)+'px'},1000);
+                }
+
         },10000)
         setInterval(function(){
             l--;
             if(l<0){l=5}
-            $time.eq(3).stop().animate({marginTop:(-85*l)+'px'},1000);
+                if($(window).innerWidth()>600){
+                    $time.eq(3).stop().animate({marginTop:(-85*l)+'px'},1000);
+                }
+                else{
+                    $time.eq(3).stop().animate({marginTop:(-50*l)+'px'},1000);
+                }
         },60000)
 
         function blinkFn1(){
@@ -113,6 +165,8 @@ var portfolio2 = {
         var n = $('#section3 .slide').length;
         var $slideWrap = $('#section3 .slide-wrap');
         var $slideW = $slide.innerWidth();
+        var $topContent = $('#section3 .top-content');
+        var $topContentH = $slideW*1.324324324;
         var next = [];
         var prev = [];
         var start = 0;
@@ -122,13 +176,19 @@ var portfolio2 = {
         var setId2 = 0;
 
         function resizeFn(){
-            if($(window).innerWidth()<=780){
+            if($(window).innerWidth()<=780 && $(window).innerWidth()>600){
                 $slide.css({width:330+'px'});
             }
-            else{
+            else if($(window).innerWidth()<=600){
+                $slide.css({width:250+'px'});
+            }
+            else if($(window).innerWidth()>780){
                 $slide.css({width:390+'px'});
             }
             $slideW = $slide.innerWidth();
+            $topContentH = $slideW*1.324324324;
+            
+            $topContent.css({height:$topContentH});
             // movingNextFn();
         }
         setTimeout(resizeFn,100);
@@ -193,10 +253,20 @@ var portfolio2 = {
                 e.preventDefault();
                 start = e.pageX;
             },
+            touchstart:function(e){
+                e.preventDefault();
+                start = e.originalEvent.changedTouches[0].pageX;
+            },
             mouseup:function(e){
                 e.preventDefault();
                 end = e.pageX
                 swipeFn();
+            },
+            touchend:function(e){
+                e.preventDefault();
+                end = e.originalEvent.changedTouches[0].pageX;
+                swipeFn();
+                console.log(e.originalEvent);
             }
         })
         
@@ -214,6 +284,17 @@ var portfolio2 = {
                 }
             }
         }
+
+        // $slideWrap.swipe({
+        //     swipeLeft:function(){
+        //         pause();
+        //         nextFn();
+        //     },
+        //     swipeRight:function(){
+        //         pause();
+        //         prevFn();
+        //     }
+        // })
 
         $slide.on({
             mouseover:function(){
@@ -570,6 +651,18 @@ var portfolio2 = {
         var cnt = 0;
         var setId =0;
         var t=0;
+        var $cube = $('#section7 ul')
+        
+        // function resizeFn(){
+        //     $cube.addClass('addEvent');
+        // }
+        // setTimeout(resizeFn,100);
+
+        // $(window).resize(function(){
+        //     setTimeout(resizeFn,100);
+        // })
+        
+        // $cube.on({})//모바일에서 누르면 애드클래스 하기
 
 
         function eventFn(){
@@ -638,6 +731,17 @@ var portfolio2 = {
         var next = [];
         var n =0;
         var t=0;
+        var $rightBox = $('#section8 .right-box');
+
+        $(window).scroll(function(){
+            $scroll = $(window).scrollTop()*0.4;
+            if($(window).innerWidth()>1200){
+                $rightBox.css({marginTop:(2500-$scroll)+'px'})
+            }
+            else{
+                $rightBox.css({marginTop:0})
+            }
+        })
 
         function eventFn(){
             next = [2,0,1];
@@ -684,6 +788,384 @@ var portfolio2 = {
 
 
 
+    },
+    section9:function(){
+        var $btnBox = $('#section9 .btn-box');
+        var $bottom = $('#section9 .bottom');
+        var $bottomW = $bottom.innerWidth();
+        var $bottomH = $bottomW*0.509196006;
+        var $col = $('#section9 .col');
+        var $slide = $('#section9 .slide');
+        var $colW =  $col.innerWidth();
+        var $topWrap = $('#section9 .top-wrap');
+        var $imgBox = $('#section9 .img-box');
+        var n = $slide.length-1;
+        var cnt =0;
+        var p =0;
+        var setId =0;
+        var c = 0;
+        var delta = 0;
+
+
+        $(window).scroll(function(){
+            $scroll = $(window).scrollTop()*0.7;
+            // console.log('scroll'+$scroll)
+            if($(window).innerWidth()>1200){
+                $topWrap.css({right:-(5900-$scroll)+'px'});
+            }
+            else if($(window).innerWidth()<=1200 && $(window).innerWidth()>780){
+                $topWrap.css({right:-(6700-$scroll)+'px'});
+            }
+            else if($(window).innerWidth()<=780 && $(window).innerHeight()>500){
+                $topWrap.css({right:-(6500-$scroll)+'px'});
+            }
+            else if($(window).innerWidth()<=500){
+                $topWrap.css({right:-($scroll*100)+'px'});
+            }
+            
+            $imgBox.css({transform:'rotate('+$scroll+'deg)'})
+        })
+
+        function resizeFn(){
+            $bottomW = $bottom.innerWidth();
+            $bottomH = $bottomW*0.509196006;
+
+            $bottom.css({height:$bottomH});
+
+            if($(window).innerWidth()>780){
+                $col.css({width:50+'%',opacity:1,zIndex:4});
+            }
+            else{
+                $col.css({width:100+'%'});
+            }
+        }
+        setTimeout(resizeFn,100);
+        $(window).resize(function(){
+            setTimeout(resizeFn,100);
+        })
+
+
+    
+        function eventFn(){
+            p=cnt;
+            $btnBox.removeClass('addEvent');
+            $btnBox.eq(p).addClass('addEvent');
+        }
+        eventFn();
+
+
+        // 블라인드 슬라이드
+        function blindslideFn(){
+            $slide.find('.col').css({opacity:1})
+            $slide.eq(cnt==0?n:cnt-1).css({zIndex:5})
+            $slide.eq(cnt).css({zIndex:4})
+            $slide.eq(cnt==0?n:cnt-1).find('.col').stop().animate({width:0},1000);
+            $slide.eq(cnt).find('.col').stop().animate({width:50+'%'},0);
+            eventFn();  
+        }
+
+        //페이드인아웃 슬라이드
+        function fadeInOutSlideFn(){
+            $slide.find('.col').eq(1).css({width:100+'%'})
+            $slide.eq(cnt==0?n:cnt-1).css({zIndex:5})
+            $slide.eq(cnt).css({zIndex:4})
+            $slide.eq(cnt==0?n:cnt-1).find('.col').stop().animate({opacity:0},1000);
+            $slide.eq(cnt).find('.col').stop().animate({opacity:1},0);
+            eventFn();   
+        }
+
+        function nextFn(){
+            cnt++;
+            if(cnt>n){cnt=0}
+            if($(window).innerWidth()>780){
+                setTimeout(blindslideFn,100);
+            }
+            else{
+                setTimeout(fadeInOutSlideFn,100);
+            }
+
+        }
+        $('#section9 .slide-wrap').on({
+            click:function(){
+                clearInterval(setId);
+                nextFn()
+                autoFn();
+            }
+        })
+
+        $btnBox.each(function(idx){
+            $btnBox.eq(idx).on({
+                click:function(){
+                    clearInterval(setId);
+                    nextFn()
+                    autoFn();
+                    $btnBox.removeClass('addEvent');
+                    $btnBox.eq(idx).addClass('addEvent');
+                    if($(window).innerWidth()>780){
+                        cnt = idx
+                       blindslideFn();
+                    }
+                    else{
+                        cnt=idx;
+                       fadeInOutSlideFn();
+                    }
+                }
+            })
+        })
+       
+
+        function autoFn(){
+            setId = setInterval(nextFn,3000);
+        }
+        autoFn();
+
+    },
+    section10:function(){
+        var $Ul = $('#section10 .gallery-wrap');
+        var $imgBox = $('#section10 .img-box');
+        var $imgBoxW = $imgBox.innerWidth();
+        var $imgBoxH = $imgBoxW*1.333333333;
+        var $img = $('#section10 .img');
+        var $imgW = $img.innerWidth();
+        var $imgH = $imgW*1.071428571;
+        var $btnWrap = $('#section10 .btn-wrap');
+
+        var show = [0,1,2,3,4,5,6,7,8,9];
+        var hide = [];
+
+        var n = show.length;
+        var cols = 5;
+        var rows = n/cols;
+        var t =0;
+        var k =0;
+
+        
+        function colsFn(){
+            if($(window).innerWidth()>1200){
+                cols = 5;     
+            }
+            else if($(window).innerWidth()<=1200 && $(window).innerWidth()>900){
+                cols = 4;               
+            }
+            else if($(window).innerWidth()<=900 && $(window).innerWidth()>780){
+                cols = 3;
+            }
+            else if($(window).innerWidth()<=780 && $(window).innerWidth()>500){
+                cols = 2;
+            }
+            else if($(window).innerWidth()<=500){
+                cols = 1;
+            }
+
+            $imgBoxW = 100/cols;
+            $imgBox.css({width:$imgBoxW+'%'});
+
+            // arrngFn()
+        }
+
+        function arrngFn(idx){
+            t=idx;
+            if(t==0){
+                show = [0,1,2,3,4,5,6,7,8,9];
+                hide = [];
+            }
+            else if(t==1){
+                show = [0,1,5,8,9];
+                hide = [2,3,4,6,7];
+            }
+            else if(t==2){
+                show = [2,3,6,7];
+                hide = [0,1,4,5,8,9];  
+            }
+            else if(t==3){
+                show = [0,3,5,7,8,9];
+                hide = [1,2,4,6];  
+            }
+            else if(t==4){
+                show = [1,2,4,6,7,8];
+                hide = [0,3,5,9];  
+            }
+
+            console.log(t)
+
+            colsFn();
+            console.log(cols)
+            n = show.length;
+            rows = Math.ceil(n/cols);
+
+            $Ul.css({height:rows*$imgBoxH});
+
+            $.each(hide,function(idx){
+                $imgBox.eq(hide[idx]).stop().hide(100);
+            })
+
+
+            console.log(show);
+            k=-1;
+            for(var i=0;i<rows;i++){
+                for(var j=0;j<cols;j++){
+                    k++;
+                    $imgBox.eq(show[k]).stop().show().animate({left:($imgBoxW*j)+'%',top:($imgBoxH*i)+'px'},400)
+                }
+            }
+
+            // $.each(show,function(idx){
+            //     $imgBox.eq(show[i]).stop().show(500);
+
+            // })
+            
+   
+        }
+
+
+
+
+
+        function resizeFn(){
+            
+            
+            setTimeout(arrngFn)
+            
+            // colsFn();
+            // n = show.length;
+            // rows = Math.ceil(n/cols);
+
+            // $Ul.css({height:rows*$imgBoxH});
+
+            $imgBoxW = $imgBox.innerWidth();
+            $imgBoxH = $imgBoxW*1.333333333;
+            $imgBox.css({width:$imgBoxW,height:$imgBoxH});
+
+            $img.css({height:$imgBoxW});
+
+
+
+
+            // if($(window).innerWidth()>1200){
+            //     cols = 5;     
+            // }
+            // else if($(window).innerWidth()<=1200 && $(window).innerWidth()>900){
+            //     cols = 4;               
+            // }
+            // else if($(window).innerWidth()<=900 && $(window).innerWidth()>780){
+            //     cols = 3;
+            // }
+            // else if($(window).innerWidth()<=780 && $(window).innerWidth()>500){
+            //     cols = 2;
+            // }
+            // else if($(window).innerWidth()<=500){
+            //     cols = 1;
+            // }
+
+            // $imgBoxW = 100/cols;
+            // $imgBox.css({width:$imgBoxW+'%'});
+
+            // t=idx;
+            // if(t==0){
+            //     show = [0,1,2,3,4,5,6,7,8,9];
+            //     hide = [];
+            // }
+            // else if(t==1){
+            //     show = [0,1,5,8,9];
+            //     hide = [2,3,4,6,7];
+            // }
+            // else if(t==2){
+            //     show = [2,3,6,7];
+            //     hide = [0,1,4,5,8,9];  
+            // }
+            // else if(t==3){
+            //     show = [0,3,5,7,8,9];
+            //     hide = [1,2,4,6];  
+            // }
+            // else if(t==4){
+            //     show = [1,2,4,6,7,8];
+            //     hide = [0,3,5,9];  
+            // }
+            // t=0;
+
+
+            // colsFn();
+            // n = show.length;
+            // rows = Math.ceil(n/cols);
+
+            // $Ul.css({height:rows*$imgBoxH});
+
+
+            // $.each(hide,function(idx){
+            //     $imgBox.eq(hide[idx]).stop().hide(0);
+            // })
+
+
+            // k=-1;
+            // for(var i=0;i<=rows;i++){
+            //     for(var j=0;j<cols;j++){
+            //         k++;
+            //         $imgBox.eq(show[k]).stop().show().animate({left:($imgBoxW*j)+'%',top:($imgBoxH*i)+'%'},400)
+            //         console.log($imgBoxH)
+            //     }
+            // }
+
+            // for(var i=0;i<=n;i++){
+            //     $imgBox.eq(show[i]).stop().show(500);
+            // }
+
+
+        }
+        setTimeout(resizeFn,100);
+
+        $(window).resize(function(){
+            resizeFn();
+        })
+
+        $btnWrap.each(function(idx){
+            $btnWrap.eq(idx).on({
+                click:function(){
+                    arrngFn(idx)
+                    $btnWrap.removeClass('addEvent');
+                    $btnWrap.eq(idx).addClass('addEvent');
+                }
+            })
+        })
+       
+    },
+    footer2Fn:function(){
+        var $footerImg = $('#rollingFooter .footer-img');
+        var cnt = 0;
+        var n = $footerImg.length -1;
+        var next = [3,0,1,2];
+
+        console.log('n: '+$footerImg.length)
+        
+        function slideFn(){
+            next = [3,0,1,2];
+            for(var i=0;i<=cnt;i++){
+                var tem = next.shift();
+                next.push(tem);
+            }
+            for(var i=0;i<=n;i++){
+                $footerImg.eq(next[i]).stop().animate({left:(785*i)+'px'},0).animate({left:(785*(i-1)+'px')},6000,'linear');
+            }
+        }
+
+        function nextSlideFn(){
+            cnt++;
+            if(cnt>n){cnt=0}
+            slideFn();
+        }
+
+        $footerImg.on({
+            click:function(){
+                nextSlideFn()
+            }
+        })
+
+        function rollingFn(){
+            nextSlideFn();
+            setInterval(nextSlideFn,6000);
+        }
+        rollingFn();
+
+        
     }
 
 };
