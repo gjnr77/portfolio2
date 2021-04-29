@@ -8,7 +8,7 @@ html {overflow-y:scroll;overflow-x:hidden;}
 
 body {font:normal 14px/1 'poppins','roboto','arial';color:#111;background:#fff;}
 
-h1,h3,h4,h5,h6 {font-weight:normal;font-size:14px;}
+h1,h3,h4,h5,h6 {font-weight:normal;font-size:14px;color:#111;}
 h2 {font-family: 'El Messiri';font-weight:normal;font-size:85px;}
 i,em,address {font-style:normal;}
 ul,li {list-style:none;}
@@ -17,7 +17,7 @@ ul,li {list-style:none;}
 .blind {display:block;text-indent:-2000px;overflow:hidden;}
 
 /* 링크태그 */
-a {color:#444;text-decoration:none;}
+a {color:#111;text-decoration:none;}
 a:focus {outline:0;}
 a:hover {outline:0;}
 table {border-collapse:collapse;}

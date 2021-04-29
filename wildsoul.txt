@@ -5,3 +5,11 @@ container 1500px
 margin:0 15px
 
 D:/portfolio2/04_22_portfolio2_wildsoul
+
+
+1. 타이머
+너비 조절 시 리사이즈 안됨 (아예 리사이즈 메서드가 안먹은듯)
+
+2. 잼통 돌아가는거,,
+
+3. section5 위에 박스, 아래 박스 모바일에서는 
