@@ -614,6 +614,24 @@ var portfolio2 = {
         var cnt=0;
         var setId = 0;
         var t2=0;
+        var $contentWrap = $('#section5 .content-wrap');
+        var $container = $('#section5 .container');
+        var $containerH = $container.innerHeight();
+
+
+        function resizeFn(){
+            if($(window).innerWidth()>1200){
+                $containerH = $container.innerHeight();
+                $contentWrap.css({height:$containerH})
+            }
+            else{
+                $contentWrap.css({height:'auto'})
+            }
+        }
+        resizeFn()
+        $(window).resize(function(){
+            resizeFn()
+        })
 
         //왼쪽 테이스팃!
 
