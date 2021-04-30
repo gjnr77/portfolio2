@@ -198,30 +198,37 @@ var portfolio2 = {
         var $topBoxW = $('#section2 .top-box').innerWidth();
         var $h2Size = $topBoxW*0.073333333;
         var $h2 = $('#section2 h2');
-        
-
-        // function resizeFn(){
-        //     $topBoxW = $('#section2 .top-box').innerWidth();
-        //     $h2Size = $topBoxW*0.073333333;
-
-        //     $h2.css({fontSize:$h2Size});
-        // }
-        // $(window).resize(function(){
-        //     resizeFn();  
-        // })
+        var $container = $('#section2 .container');
+        var $containerW = $container.innerWidth();
+        var $containerH = $containerW*0.608974359;
+        var newW = 0;
+        var oldW = 0;
 
         $(window).resize(function(){
-            
-            if($(window).innerWidth()!=$(window).innerWidth()){
-                setTimeout(mainTimer,100);
 
+            //섹션2 높이 조정
+            if($(window).innerWidth()<=780){
+                $containerW = $container.innerWidth();
+                $containerH = $containerW*0.608974359;
+                $container.css({height:$containerH})
             }
+            else if($(window).innerWidth()>780){
+                $container.css({height:475+'px'})
+            }
+            //모바일 설정바 영향 안받기
+
+            newW = $(window).innerWidth();
+            if(newW != oldW){
+                setTimeout(mainTimer,100);
+            }
+            oldW = newW;
         })
         
         function mainTimer(){
             for(var i=0;i<=n;i++){
                 if($(window).innerWidth()>600){
                     $time.eq(i).stop().animate({marginTop:0},0).animate({marginTop:(-85*move[i])+'px'},1000);
+
                 }
                 else {
                     $time.eq(i).stop().animate({marginTop:0},0).animate({marginTop:(-50*move[i])+'px'},1000);
@@ -865,7 +872,7 @@ var portfolio2 = {
             if($(window).scrollTop() >= $('#section8').offset().top-700  &&  $(window).scrollTop() < $('#section9').offset().top+200){
                 $scroll = $(window).scrollTop()*0.4;
                 if($(window).innerWidth()>1200){
-                    $rightBox.css({marginTop:(2600-$scroll)+'px'})
+                    $rightBox.css({marginTop:(2500-$scroll)+'px'})
                 }
                 else{
                     $rightBox.css({marginTop:0})
