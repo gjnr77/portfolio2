@@ -109,10 +109,12 @@ var portfolio2 = {
             var $MHLan = $('#header .MH-lan');
             var $mobileXBtn = $('#header .mobile-x-btn');
             var $nav = $('#nav');
+            var $navW = $('#nav').innerWidth();
 
             function resizeFn(){
                 $sub.css({height:$(window).innerHeight()})
-                $nav.css({width:$(window).innerWidth()});
+                $navW = $('#nav').innerWidth();
+                $nav.css({width:$navW});
                 if($(window).innerWidth()<=780){
                     $sub.css({width:$(window).innerWidth()});
                 }
@@ -437,7 +439,7 @@ var portfolio2 = {
 
 
         //buy now! 롤링
-        var $h5 = $('#section3 h5');
+        var $txt = $('#section3 .buyNow');
         var nextH5 = [];
         var cnt2=0;
         var $buyBox = $('#section3 .buy-box');
@@ -456,7 +458,7 @@ var portfolio2 = {
             }
             // for(var idx=0;idx<=9;idx++){
                 for(var i=0;i<=2;i++){
-                    $buyBox.eq(m).find('h5').eq(nextH5[i]).stop().animate({left:(100*i)+'%'},0).animate({left:(100*(i-1))+'%'},1000,'linear');
+                    $buyBox.eq(m).find('.buyNow').eq(nextH5[i]).stop().animate({left:(100*i)+'%'},0).animate({left:(100*(i-1))+'%'},1000,'linear');
                 }
             // }
 
@@ -857,15 +859,19 @@ var portfolio2 = {
         var n =0;
         var t=0;
         var $rightBox = $('#section8 .right-box');
+        var $right = $('#section8 .right');
 
         $(window).scroll(function(){
-            $scroll = $(window).scrollTop()*0.4;
-            if($(window).innerWidth()>1200){
-                $rightBox.css({marginTop:(2500-$scroll)+'px'})
-            }
-            else{
-                $rightBox.css({marginTop:0})
-            }
+            if($(window).scrollTop() >= $('#section8').offset().top-700  &&  $(window).scrollTop() < $('#section9').offset().top+200){
+                $scroll = $(window).scrollTop()*0.4;
+                if($(window).innerWidth()>1200){
+                    $rightBox.css({marginTop:(2600-$scroll)+'px'})
+                }
+                else{
+                    $rightBox.css({marginTop:0})
+                }
+            } 
+
         })
 
         function eventFn(){
@@ -1339,24 +1345,19 @@ var portfolio2 = {
     },
     eventFn:function(){
         var smooth = $('.smooth');
-        var smooth = $('.smooth');
 
         smooth.on({
             click:function(){
                 var url = $(this).attr('href');
                 $('html,body').stop().animate({scrollTop:$(url).offset().top},600);
+                console.log('url:'+ $(url).offset().top)
             }
         })
+        // $(window).scroll(function(){
+        //     console.log('window'+ $(window).scrollTop())
+        //     console.log('section10:'+ $('#section10').offset().top)
 
-        // smoothBtn.on({
-        //     click:function(e){
-        //         e.preventDefault();
-        //         var url = $(this).attr('href');
-        //         $('html,body').stop().animate({scrollTop:$(url).offset().top},600);
-        //     }
         // })
-
-        
 
     },
     ajaxFn:function(){
@@ -1364,13 +1365,37 @@ var portfolio2 = {
         var $input = $('#email');
         var $successMsg = $('#footer .success-msg');
         var $xBox = $('#footer .x-box');
+        var $check = $('#footer .check');
+        var $email = $('#footer #email');
 
         $submitBtn.on({
             click:function(e){
                 e.preventDefault();
                 // $input = $input.val();
 
+                $check.on({
+                    click:function(){
+                        // alert('')
+
+                        $check.attr('checked',true);
+                        $check.removeClass('addEvent');
+
+                        console.log($check.is(":checked"));
+
+                    }
+                })
+                // $emailForm.on({
+
+                // })
+
                 if($input.val()==''){
+                    $email.addClass('addEvent');
+                    $email.focus();
+                    return false;
+                }
+                if($check.is(":checked")==false){
+                    console.log('false')
+                    $check.addClass('addEvent');
                     return false;
                 }
                 else{
@@ -1391,7 +1416,8 @@ var portfolio2 = {
                             setTimeout(function(){
                                 $successMsg.removeClass('addEvent');
                             },3000);
-
+                            $email.removeClass('addEvent');
+                            $check.attr('checked',false);
                             $input.val('');
                         },
                         error:function(){
@@ -1418,6 +1444,7 @@ var portfolio2 = {
         var $section6 = $('#section6');
         var $section7 = $('#section7');
         var $section8 = $('#section8');
+        var $right = $('#section8 .right');
         var $section10 = $('#section10');
         var $sec10ImgBox = $('#section10 .img-box');
         var $open = $('#open');
@@ -1450,7 +1477,7 @@ var portfolio2 = {
                 $section1.addClass('addEvent')
             }
 
-            if($(window).scrollTop() > $section2.offset().top-400){
+            if($(window).scrollTop() > $section2.offset().top-500){
                 
                 $section2.addClass('addEvent')
 
@@ -1510,7 +1537,7 @@ var portfolio2 = {
                     setTimeout(function(){
                         $section5Li.each(function(idx){
                             setTimeout(function(){
-                                $section5Li.eq(idx).addClass('addEvent');
+                                $section5Li.eq(idx).addClass('addscroll');
                             },200*idx)
                         })
                     },500)
@@ -1534,7 +1561,7 @@ var portfolio2 = {
                     setTimeout(function(){
                         $section5Li.each(function(idx){
                             setTimeout(function(){
-                                $section5Li.eq(idx).addClass('addEvent');
+                                $section5Li.eq(idx).addClass('addscroll');
                             },200*idx)
                         })
                     },500)
@@ -1552,7 +1579,7 @@ var portfolio2 = {
 
             }
             if($(window).scrollTop() > $section8.offset().top-400){
-                
+                $right.css({opacity:1});
                 $section8.addClass('addEvent')
 
             }
@@ -1571,9 +1598,10 @@ var portfolio2 = {
                 $section5.removeClass('addEvent')
                 $sec5TopBox.removeClass('addEvent')
                 $sec5Col1.removeClass('addEvent')
-                $section5Li.removeClass('addEvent')
+                $section5Li.removeClass('addscroll')
                 $section6.removeClass('addEvent')
                 $section7.removeClass('addEvent')
+                $right.css({opacity:0});
                 $section8.removeClass('addEvent')
                 $section10.removeClass('addEvent')
             }
