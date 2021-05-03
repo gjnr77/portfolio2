@@ -864,10 +864,10 @@ var portfolio2 = {
 
             if($(window).innerWidth()>780){
             $leftH = $left.innerHeight();
-                $right.css({height:$leftH});
+                $rightBox.css({height:$leftH});
             }
             else{
-                $right.css({height:100+'%'});
+                $rightBox.css({height:100+'%'});
             }
         }
         setTimeout(resizeFn,100);
