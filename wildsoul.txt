@@ -4,7 +4,12 @@ https://www.wildsouls.gr/en
 container 1500px
 margin:0 15px
 
-D:/portfolio2/04_22_portfolio2_wildsoul
+
+깃허브
+https://gjnr77.github.io/portfolio2/
+닷홈
+gjnr77.dothome.co.kr/portfolio2_wildsoul
+
 
 
 1. 타이머
