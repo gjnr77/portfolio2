@@ -854,7 +854,6 @@ var portfolio2 = {
                 }
             }
         })
-
     },
     section8:function(){
         var $left = $('#section8 .left');
@@ -862,9 +861,9 @@ var portfolio2 = {
         var $leftH = $left.innerHeight();
 
         function resizeFn(){
-            $leftH = $left.innerHeight();
 
             if($(window).innerWidth()>780){
+            $leftH = $left.innerHeight();
                 $right.css({height:$leftH});
             }
             else{

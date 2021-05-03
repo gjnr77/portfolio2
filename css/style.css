@@ -435,8 +435,8 @@
 
 #wrap #main #section8 .wrap .gap .container .right {width:40%;float:left;opacity:0;transition:opacity .3s;}
 #wrap #main #section8 .wrap .gap .container .right .right-gap {padding:0 15px;}
-#wrap #main #section8 .wrap .gap .container .right .right-gap .right-box {width:80%;background:#ec4844;height:724px;margin-top:0;}
-#wrap #main #section8 .wrap .gap .container .right .right-gap .right-box .right-box-gap {display:table;height:100%;vertical-align:middle;}
+#wrap #main #section8 .wrap .gap .container .right .right-gap .right-box {width:80%;background:#ec4844;/* height:724px; */margin-top:0;}
+#wrap #main #section8 .wrap .gap .container .right .right-gap .right-box .right-box-gap {display:table;height:100%;vertical-align:middle;padding:50px 0;}
 #wrap #main #section8 .wrap .gap .container .right .right-gap .right-box .right-box-gap .right-box-wrap {display:table-cell;width:70%;margin:0 auto;height:100%;text-align:center;}
 #wrap #main #section8 .wrap .gap .container .right .right-gap .right-box .right-box-gap .right-box-wrap h3 {width:80%;margin:0 auto;padding:20px 0;}
 #wrap #main #section8 .wrap .gap .container .right .right-gap .right-box .right-box-gap .right-box-wrap .btn-box {margin:0 auto;}
